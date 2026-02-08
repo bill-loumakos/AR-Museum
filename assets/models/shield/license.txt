@@ -1,0 +1,11 @@
+Model Information:
+* title:	Knight's Shield
+* source:	https://sketchfab.com/3d-models/knights-shield-5b3b60c04410494a9ee0d55393e09383
+* author:	Faizulla_Kaisan (https://sketchfab.com/Faizulla_Kaisan)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Knight's Shield" (https://sketchfab.com/3d-models/knights-shield-5b3b60c04410494a9ee0d55393e09383) by Faizulla_Kaisan (https://sketchfab.com/Faizulla_Kaisan) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

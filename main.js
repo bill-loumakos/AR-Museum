@@ -13,11 +13,11 @@ let currentStage = "intro";
 // ===== Stage data =====
 const STAGES = {
   intro: {
-    bg: "assets/intro.png",
-    title: "AR Experience",
-    text: `Sth about the setting.`,
+    bg: "assets/spear.jpg",
+    title: "Roman Preparation",
+    text: `Are you ready to start the Roman Preparation?`,
     buttons: [
-      { label: "Start", action: () => {
+      { label: "Press To Start", action: () => {
           enableSound();
           playAmbient();
           speak(STAGES.intro.text);
@@ -31,37 +31,37 @@ const STAGES = {
   },
 
   role: {
-    bg: "assets/role-selection.png",
-    title: "Your Quest",
-    text: `Explore and reveal what lies hidden.`,
+    bg: "assets/shield.jpg",
+    title: "Your Goal",
+    text: `Explore All The Museum Findings And Prepare The Soldier.`,
     buttons: [
-      { label: "Lore Keeper", action: () => goTo("lore") },
-      { label: "Instructions", action: () => goTo("instructions") }
+      { label: "Soldier", action: () => goTo("lore") },
+      { label: "How To Play", action: () => goTo("instructions") }
     ]
   },
 
   lore: {
-    bg: "assets/lore-keeper.png",
-    title: "Lore Keeper",
-    text: `Use AR to uncover traces. Each clue will reveal a part of the story.`,
+    bg: "assets/soldier.jpg",
+    title: "Soldier",
+    text: `Use AR to scan the findings. Each finding will reveal its story.`,
     buttons: [
-      { label: "Explore via AR", action: () => {
+      { label: "Explore!", action: () => {
           stopAmbient();
           window.open(`ar.html?from=${currentStage}`, "_blank");
       }},
-      { label: "Finish Task", action: () => goTo("end") },
+      { label: "Finish", action: () => goTo("end") },
       { label: "Back", action: () => goTo("role") }
     ]
   },
 
   instructions: {
-    bg: "assets/instructions.png",
+    bg: "assets/armor.jpg",
     title: "How to Play — Overview",
     text: `
-      • You play as the <b>Lore Keeper</b>.<br>
+      • You play as the <b>Soldier</b>.<br>
       • Use your device camera to scan AR markers hidden in the environment.<br>
-      • Each marker reveals a voice message or a symbol.<br>
-      • Collect all the pieces, then finish your task.<br>
+      • Each marker reveals a message about the story of each finding.<br>
+      • Find and scan all the findings to prepare the soldier.<br>
     `,
     buttons: [
       { label: "Back", action: () => goTo("role") }
@@ -70,11 +70,11 @@ const STAGES = {
 
   // ——— Minimal edits so the end "has meaning" ———
   end: {
-  bg: "assets/olympus.jpg",
-  title: "Ολοκλήρωση",
-  text: `Ολοκλήρωσες το ταξίδι σου.<br><br>Θέλεις να ξαναρχίσεις;`,
+  bg: "assets/complete.jpg",
+  title: "Completed",
+  text: `You Made It!<br><br>Go Again?`,
   buttons: [
-    { label: "Ξεκίνημα ξανά", action: () => goTo("intro", true) }
+    { label: "Restart", action: () => goTo("intro", true) }
   ]
 }
 };

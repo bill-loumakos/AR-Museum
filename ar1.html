@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AR Explorer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- MindAR Library -->
+  <script src="./libs/mindar/mindar-image-three.prod.js"></script>
+
+  <style>
+    html, body {
+      margin: 0; padding: 0; overflow: hidden;
+      height: 100%; width: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    .mindar-container {
+      width: 100vw; height: 100vh;
+      position: absolute; top: 0; left: 0;
+      display: block;
+    }
+
+    #ar-ui { width: 100%; height: 100%; }
+
+    #ui-buttons {
+      position: absolute; top: 10px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 10; pointer-events: auto;
+    }
+
+    #ui-buttons button {
+      padding: 15px 30px; font-size: 18px; margin: 10px;
+      background: #33691e; color: white;
+      border: none; border-radius: 10px; cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="ui-buttons">
+    <button id="start-ar-engine-button">Play</button>
+    <button id="return-button">Quit</button>
+  </div>
+
+  <div id="ar-ui" class="mindar-container"></div>
+
+  <script type="module">
+    import { loadGLTF, loadAudio } from "./libs/loader.js";
+    const THREE = window.MINDAR.IMAGE.THREE;
+
+    let mindarThree = null;
+    let isStarted = false;
+
+    const startAREngineButton = document.getElementById("start-ar-engine-button");
+    const returnButton = document.getElementById("return-button");
+    const arUI = document.getElementById("ar-ui");
+
+    // --- FIX: get 'from' from query string ---
+    const params = new URLSearchParams(window.location.search);
+    const from = params.get('from') || 'lore'; // fallback to 'lore' if not set
+
+    // Return to the previous page
+    const goBackToRolePage = () => {
+      window.location.href = `index.html?section=${from}`;
+    };
+    returnButton.addEventListener("click", goBackToRolePage);
+
+    // Function to create the AR experience (gltf model, mp3 sound)
+    const createExperience = async (modelPath, anchorIndex, listener, audioPath, scaleVector) => {
+      const model = await loadGLTF(modelPath);
+      model.scene.scale.copy(scaleVector);
+      model.scene.position.set(0, 0, 0);
+
+      const anchor = mindarThree.addAnchor(anchorIndex);
+      anchor.group.add(model.scene);
+
+      const audioBuffer = await loadAudio(audioPath);
+
+      const audio = new THREE.PositionalAudio(listener);
+      audio.setBuffer(audioBuffer);
+      audio.setRefDistance(100);
+      audio.setLoop(true);
+      audio.setVolume(0.5); // volume 0-1
+
+      anchor.group.add(audio);
+
+      anchor.onTargetFound = () => audio.play();
+      anchor.onTargetLost = () => audio.pause();
+
+      return anchor;
+    };
+
+    const start = async () => {
+      if (isStarted) return;
+      isStarted = true;
+
+      mindarThree = new window.MINDAR.IMAGE.MindARThree({
+        container: arUI,
+        imageTargetSrc: './assets/targets/final.mind' // Βεβαιώσου ότι περιέχει 3 στόχους
+      });
+
+      const { renderer, scene, camera } = mindarThree;
+
+      const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+      scene.add(light);
+
+      const listener = new THREE.AudioListener();
+      camera.add(listener);
+
+      // Create 3 AR experiences
+      await createExperience(
+        './assets/models/coin/scene.gltf', 
+        0, 
+        listener, 
+        './assets/sounds/coinsound1.wav', 
+        new THREE.Vector3(0.2, 0.2, 0.2)
+      );
+
+
+      await createExperience(
+        './assets/models/helmet/scene.gltf', 
+        1, 
+        listener, 
+        './assets/sounds/helmetsound.wav', 
+        new THREE.Vector3(0.2, 0.2, 0.2) 
+      );
+
+      await createExperience(
+        './assets/models/spear/scene.gltf', 
+        2, 
+        listener, 
+        './assets/sounds/spearsound.wav', 
+        new THREE.Vector3(1.3, 1.3, 1.3)
+      );
+	  
+	  await createExperience(
+        './assets/models/coin/scene.gltf', 
+        3, 
+        listener, 
+        './assets/sounds/coinsound2.wav', 
+        new THREE.Vector3(0.2, 0.2, 0.2) 
+      );
+	  
+	  await createExperience(
+        './assets/models/armor/scene.gltf', 
+        4, 
+        listener, 
+        './assets/sounds/armorsound.wav', 
+        new THREE.Vector3(0.2, 0.2, 0.2) 
+      );
+	  
+	  await createExperience(
+        './assets/models/coin/scene.gltf', 
+        5, 
+        listener, 
+        './assets/sounds/coinsound3.wav', 
+        new THREE.Vector3(0.2, 0.2, 0.2) 
+      );
+	  
+	  await createExperience(
+        './assets/models/shield/scene.gltf', 
+        6, 
+        listener, 
+        './assets/sounds/shieldsound.wav', 
+        new THREE.Vector3(0.2, 0.2, 0.2) 
+      );
+
+      await mindarThree.start();
+
+      renderer.setAnimationLoop(() => {
+        renderer.render(scene, camera);
+      });
+
+      startAREngineButton.disabled = true;
+    };
+
+    startAREngineButton.addEventListener("click", start);
+	
+	
+  </script>
+  
+
+</body>
+</html>

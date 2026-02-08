@@ -1,0 +1,11 @@
+Model Information:
+* title:	Bronze Hoplite Helmet
+* source:	https://sketchfab.com/3d-models/bronze-hoplite-helmet-46842a6816024c61b2abc31fb1904985
+* author:	PolyCrafter (https://sketchfab.com/azamat.abdukahhorovich)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Bronze Hoplite Helmet" (https://sketchfab.com/3d-models/bronze-hoplite-helmet-46842a6816024c61b2abc31fb1904985) by PolyCrafter (https://sketchfab.com/azamat.abdukahhorovich) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

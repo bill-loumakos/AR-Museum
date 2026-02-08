@@ -1,0 +1,11 @@
+Model Information:
+* title:	Spear
+* source:	https://sketchfab.com/3d-models/spear-8aa85683b78d461995bd797bcebf0491
+* author:	Desmond.Ballantyne (https://sketchfab.com/Desmond.Ballantyne)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Spear" (https://sketchfab.com/3d-models/spear-8aa85683b78d461995bd797bcebf0491) by Desmond.Ballantyne (https://sketchfab.com/Desmond.Ballantyne) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
